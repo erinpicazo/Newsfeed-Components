@@ -101,6 +101,8 @@ const data = [
 
   Hint: You will need to use createElement more than once here!
 
+  const article = document
+
   Your function should take either an object as its one argument, or 5 separate strings mapping to each property of an article object.
 
   Step 2: Add an event listener to the expandButton span. This listener should toggle the class 'article-open' on the 'article' div.
@@ -111,3 +113,61 @@ const data = [
 
   Step 5: Add a new article to the array. Make sure it is in the same format as the others. Refresh the page to see the new article.
 */
+
+/* <div class="article">
+    <h2>{title of the article}</h2>
+    <p class="date">{date of the article}</p>
+
+    {three separate paragraph elements}
+
+    <span class='expandButton'>+</span>
+  </div> */
+
+
+  function articleMaker(t, d, p1, p2, p3) {
+    const article = document.createElement("div");
+    const title = document.createElement("h2");
+    const date = document.createElement("p");
+    const para1 = document.createElement("p");
+    const para2 = document.createElement("p");
+    const para3 = document.createElement("p");
+    const expand = document.createElement("span");
+  
+    title.textContent = t;
+    date.textContent = d;
+    para1.textContent = p1;
+    para2.textContent = p2;
+    para3.textContent = p3;
+    expand.textContent = "▼";
+  
+    article.appendChild(title);
+    article.appendChild(date);
+    article.appendChild(para1);
+    article.appendChild(para2);
+    article.appendChild(para3);
+    article.appendChild(expand);
+  
+    article.classList.add("article");
+    date.classList.add("date");
+    expand.classList.add("expandButton");
+  
+    expand.addEventListener("click", (e) => {
+      article.classList.toggle("article-open");
+      e.target.textContent = "▲";
+    });
+    return article;
+  }
+  
+  const articles = document.querySelector(".articles");
+
+data.forEach((obj) => {
+  articles.appendChild(
+    articleMaker(
+      obj.title,
+      obj.date,
+      obj.firstParagraph,
+      obj.secondParagraph,
+      obj.thirdParagraph
+    )
+  );
+});
